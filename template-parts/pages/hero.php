@@ -30,9 +30,29 @@
         <div class="hero__col">
           <div class="hero__img">
             <?php if (get_field('pereklyuchatel_hero') == 1) : ?>
+              <?php
+              $desktop_hero_image = get_field('izobrazhenie');
+              $mobile_hero_image  = get_field('izobrazhenie_m_hero');
+              $mobile_hero_url    = is_array($mobile_hero_image)
+                ? ($mobile_hero_image['url'] ?? '')
+                : $mobile_hero_image;
+              ?>
               <picture>
-                <source media="(max-width: 1229px)" srcset="<?php the_field('izobrazhenie_m_hero'); ?>">
-                <img src="<?php the_field('izobrazhenie'); ?>" alt="">
+                <?php if ($mobile_hero_url) : ?>
+                  <source media="(max-width: 1229px)" srcset="<?php echo esc_url($mobile_hero_url); ?>">
+                <?php endif; ?>
+                <?php
+                echo platejka_render_acf_image(
+                  $desktop_hero_image,
+                  'large',
+                  array(
+                    'alt'           => is_array($desktop_hero_image) ? ($desktop_hero_image['alt'] ?? '') : '',
+                    'loading'       => 'eager',
+                    'fetchpriority' => 'high',
+                    'sizes'         => '(max-width: 767px) 100vw, 553px',
+                  )
+                );
+                ?>
               </picture>
             <?php else : ?>
               <video width="553" height="553" autoplay muted loop preload="auto">
@@ -54,7 +74,16 @@
             <?php $izobrazheniya = get_sub_field('izobrazheniya'); ?>
             <?php if ($izobrazheniya) : ?>
               <div class="ach__img">
-                <img src="<?php echo esc_url($izobrazheniya['url']); ?>" alt="<?php echo esc_attr($izobrazheniya['alt']); ?>" />
+                <?php
+                echo platejka_render_acf_image(
+                  $izobrazheniya,
+                  'thumbnail',
+                  array(
+                    'alt'   => $izobrazheniya['alt'] ?? '',
+                    'sizes' => '80px',
+                  )
+                );
+                ?>
               </div>
             <?php endif; ?>
             <?php if (get_sub_field('tekst_bots')) : ?>
@@ -74,7 +103,16 @@
             <?php $izobrazheniya = get_sub_field('izobrazheniya'); ?>
             <?php if ($izobrazheniya) : ?>
               <div class="ach__img">
-                <img src="<?php echo esc_url($izobrazheniya['url']); ?>" alt="<?php echo esc_attr($izobrazheniya['alt']); ?>" />
+                <?php
+                echo platejka_render_acf_image(
+                  $izobrazheniya,
+                  'thumbnail',
+                  array(
+                    'alt'   => $izobrazheniya['alt'] ?? '',
+                    'sizes' => '80px',
+                  )
+                );
+                ?>
               </div>
             <?php endif; ?>
             <div class="ach__text"><?php the_sub_field('tekst'); ?></div>

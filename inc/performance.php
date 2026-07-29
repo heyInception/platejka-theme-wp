@@ -36,19 +36,23 @@ function platejka_is_front_template(): bool {
 /**
  * Render an ACF image through the WordPress responsive-image API.
  *
- * @param array<string, mixed>|int $image ACF image array or attachment ID.
+ * @param array<string, mixed>|int|string $image ACF image array, attachment ID, or attachment URL.
  * @param string                   $size  Registered WordPress image size.
  * @param array<string, string>    $attrs Image attributes.
  * @return string
  */
 function platejka_render_acf_image(
-	array|int $image,
+	array|int|string $image,
 	string $size,
 	array $attrs = array()
 ): string {
-	$attachment_id = is_array( $image )
-		? absint( $image['ID'] ?? $image['id'] ?? 0 )
-		: absint( $image );
+	if ( is_array( $image ) ) {
+		$attachment_id = absint( $image['ID'] ?? $image['id'] ?? 0 );
+	} elseif ( is_string( $image ) ) {
+		$attachment_id = attachment_url_to_postid( $image );
+	} else {
+		$attachment_id = absint( $image );
+	}
 
 	if ( 0 === $attachment_id ) {
 		return '';

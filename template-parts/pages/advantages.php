@@ -13,7 +13,18 @@
                 <div class="advantages__item <?php the_sub_field('vybor_elementa'); ?>">
                   <?php $izobrazhenie = get_sub_field('izobrazhenie'); ?>
                   <?php if ($izobrazhenie) : ?>
-                    <div class="advantages__img"><img src="<?php echo esc_url($izobrazhenie['url']); ?>" alt="<?php echo esc_attr($izobrazhenie['alt']); ?>" /></div>
+                    <div class="advantages__img">
+                      <?php
+                      echo platejka_render_acf_image(
+                        $izobrazhenie,
+                        'medium',
+                        array(
+                          'alt'   => $izobrazhenie['alt'] ?? '',
+                          'sizes' => '(max-width: 767px) 100vw, 320px',
+                        )
+                      );
+                      ?>
+                    </div>
                   <?php endif; ?>
                   <div class="advantages__wrap">
                     <div class="advantages__head"><?php the_sub_field('zagolovok'); ?></div>

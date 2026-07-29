@@ -23,7 +23,16 @@
               <p><?php the_sub_field('opisanie'); ?></p>
               <?php $izobrazhenie = get_sub_field('izobrazhenie'); ?>
               <?php if ($izobrazhenie) : ?>
-                <img src="<?php echo esc_url($izobrazhenie['url']); ?>" alt="<?php echo esc_attr($izobrazhenie['alt']); ?>" />
+                <?php
+                echo platejka_render_acf_image(
+                  $izobrazhenie,
+                  'medium',
+                  array(
+                    'alt'   => $izobrazhenie['alt'] ?? '',
+                    'sizes' => '(max-width: 767px) 100vw, 320px',
+                  )
+                );
+                ?>
               <?php endif; ?>
             </div>
           </div>

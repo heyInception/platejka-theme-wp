@@ -13,7 +13,16 @@
             <?php $izobrazhenie = get_sub_field('izobrazhenie'); ?>
             <?php if ($izobrazhenie) : ?>
               <div class="international__img">
-                <img src="<?php echo esc_url($izobrazhenie['url']); ?>" alt="<?php echo esc_attr($izobrazhenie['alt']); ?>" />
+                <?php
+                echo platejka_render_acf_image(
+                  $izobrazhenie,
+                  'large',
+                  array(
+                    'alt'   => $izobrazhenie['alt'] ?? '',
+                    'sizes' => '(max-width: 767px) 100vw, (max-width: 1229px) 50vw, 600px',
+                  )
+                );
+                ?>
               </div>
             <?php endif; ?>
           </div>

@@ -26,7 +26,7 @@
         <div class="notice__top">Рассчитаем размер комиссии и ответим на вопросы в течении 5 минут</div>
         <div class="notice__wrap">
           <div class="notice__img">
-            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/notice-img.png" alt="">
+            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/notice-img.png" alt="" width="266" height="276" loading="lazy" decoding="async">
           </div>
           <div class="notice__wrapper">
             <p>Проконсультирует главный менеджер компании, который работает с международными операциями около 8 лет</p>

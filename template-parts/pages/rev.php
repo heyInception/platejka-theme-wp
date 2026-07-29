@@ -37,7 +37,16 @@
                 <?php while (have_rows('izobrazheniya_reev')) : the_row(); ?>
                   <?php $izobrazhenie = get_sub_field('izobrazhenie'); ?>
                   <?php if ($izobrazhenie) : ?>
-                    <img src="<?php echo esc_url($izobrazhenie['url']); ?>" alt="<?php echo esc_attr($izobrazhenie['alt']); ?>" />
+                    <?php
+                    echo platejka_render_acf_image(
+                      $izobrazhenie,
+                      'large',
+                      array(
+                        'alt'   => $izobrazhenie['alt'] ?? '',
+                        'sizes' => '(max-width: 767px) 100vw, (max-width: 1229px) 50vw, 600px',
+                      )
+                    );
+                    ?>
                   <?php endif; ?>
                 <?php endwhile; ?>
               <?php else : ?>
@@ -56,7 +65,16 @@
                 <?php $izobrazheie = get_sub_field('izobrazheie'); ?>
                 <?php if ($izobrazheie) : ?>
                   <div class="rev__img">
-                    <img src="<?php echo esc_url($izobrazheie['url']); ?>" alt="<?php echo esc_attr($izobrazheie['alt']); ?>" />
+                    <?php
+                    echo platejka_render_acf_image(
+                      $izobrazheie,
+                      'medium',
+                      array(
+                        'alt'   => $izobrazheie['alt'] ?? '',
+                        'sizes' => '(max-width: 767px) 100vw, 320px',
+                      )
+                    );
+                    ?>
                   </div>
                 <?php endif; ?>
                 <div class="rev__text"><?php the_sub_field('zagolovok'); ?></div>
@@ -70,7 +88,16 @@
                 <?php $izobrazheie = get_sub_field('izobrazheie'); ?>
                 <?php if ($izobrazheie) : ?>
                   <div class="rev__img">
-                    <img src="<?php echo esc_url($izobrazheie['url']); ?>" alt="<?php echo esc_attr($izobrazheie['alt']); ?>" />
+                    <?php
+                    echo platejka_render_acf_image(
+                      $izobrazheie,
+                      'medium',
+                      array(
+                        'alt'   => $izobrazheie['alt'] ?? '',
+                        'sizes' => '(max-width: 767px) 100vw, 320px',
+                      )
+                    );
+                    ?>
                   </div>
                 <?php endif; ?>
                 <div class="rev__text"><?php the_sub_field('zagolovok'); ?></div>

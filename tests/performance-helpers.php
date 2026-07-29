@@ -11,6 +11,7 @@ $theme_dir = get_template_directory();
 assert( platejka_asset_version( 'css/main.css' ) === (string) filemtime( $theme_dir . '/css/main.css' ) );
 assert( platejka_asset_version( 'missing.css' ) === (string) wp_get_theme()->get( 'Version' ) );
 assert( '' === platejka_render_acf_image( 0, 'large' ) );
+assert( '' === platejka_render_acf_image( 'https://example.test/missing.jpg', 'large' ) );
 assert( is_bool( platejka_is_front_template() ) );
 assert( function_exists( 'platejka_preload_primary_font' ), 'Font preload helper must be registered.' );
 
