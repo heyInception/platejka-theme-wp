@@ -19,8 +19,10 @@ plugin-owned chat were not changed.
   interaction.
 - Infinite mobile tap-hint animation disabled and recurring hover interval
   replaced by one cancellable timeout.
-- Required Header integrations preserved. The DMP sync request alone is
-  scheduled on interaction or browser idle; see `third-party-script-map.md`.
+- Required Header queues, identifiers, and initialization payloads preserved.
+  General vendor libraries now load on first interaction or the three-second
+  fallback. Marquiz and Contact Form 7 reCAPTCHA use proximity and intent; see
+  `third-party-script-map.md`.
 - The 8,950,029-byte `coin.svg` source is preserved. The front page now uses a
   visually checked 14,468-byte WebP presentation copy at its actual display
   size. The unreferenced 2,184,046-byte `v-globe-mobile.svg` remains unchanged.
@@ -78,29 +80,27 @@ Preview URL: `https://inceptionhack-amipe-studio.wp.build`
 
 ### PageSpeed Insights laboratory result
 
-One run was recorded against the fresh cache-bypass preview on 2026-07-29.
-The four CSS WebP substitutions above were identified from this run and were
-implemented afterwards, so the table is the pre-substitution staging baseline.
+One final mobile/desktop report was recorded against the warmed cache-bypass
+preview after the CSS WebP and deferred-integration changes on 2026-07-29.
 
 | Strategy | Performance | FCP | LCP | TBT | CLS | Speed Index |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Mobile | 52 | 9.2 s | 21.1 s | 100 ms | 0.098 | 13.7 s |
-| Desktop | 93 | 0.7 s | 1.1 s | 120 ms | 0.036 | 1.9 s |
+| Mobile | 56 | 5.3 s | 7.8 s | 0 ms | 0.098 | 7.8 s |
+| Desktop | 73 | 0.6 s | 1.1 s | 440 ms | 0.036 | 2.5 s |
 
-Mobile Lighthouse reported a 10 ms TTFB. Its largest theme-owned image
-opportunities were the four CSS backgrounds now switched to WebP. Remaining
-large opportunities include plugin/third-party JavaScript, unused compiled CSS
-and JavaScript, and SVG files served from the media library.
+Compared with the earlier staging baseline, mobile improved from 52 to 56,
+FCP from 9.2 to 5.3 seconds, LCP from 21.1 to 7.8 seconds, and TBT from 100 to
+0 ms. Desktop FCP and LCP remain fast, but the agreed three-second vendor
+fallback enters the desktop Lighthouse measurement window and increases TBT.
+Further score work belongs to the WP Rocket delay/exclusion phase and the
+remaining compiled/plugin assets.
 
 ## Deferred / deployment checks
 
-- Run three mobile and three desktop tests after the updated theme commit is
-  deployed and the bare production URL cache is warmed.
-- The in-app browser screenshot command timed out, so the required 390/768/1440
-  visual comparisons must be completed on staging before merge.
-- A complete analytics, Callibri, Admitad, chat, CF7 submission, calculator,
-  slider, modal, and conversion-event dashboard check requires staging or
-  production access.
+- Recheck production once after deployment and cache warm-up; no repeated
+  laboratory runs are required for this theme phase.
+- Complete analytics, Callibri, Admitad, chat, CF7 submission, and conversion
+  event dashboard checks in the production deployment workflow.
 - `main.css` and `main.js` are compiled monoliths without their original
   Sass/JavaScript module sources or source maps. They were not mechanically
   split because that would make regression-safe ownership of component blocks
