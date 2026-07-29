@@ -68,6 +68,19 @@ function platejka_render_acf_image(
 }
 
 /**
+ * Preload the primary body-font file used above the fold.
+ *
+ * @return void
+ */
+function platejka_preload_primary_font(): void {
+	printf(
+		'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
+		esc_url( get_template_directory_uri() . '/fonts/Inter-Regular.woff2' )
+	);
+}
+add_action( 'wp_head', 'platejka_preload_primary_font', 2 );
+
+/**
  * Enqueue only the assets needed by the current template.
  *
  * @return void
