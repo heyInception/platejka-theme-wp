@@ -168,6 +168,7 @@ function platejka_scripts()
 add_action('wp_enqueue_scripts', 'platejka_scripts');
 
 require get_template_directory() . '/inc/countries.php';
+require get_template_directory() . '/inc/performance.php';
 
 /**
  * Implement the Custom Header feature.
