@@ -158,6 +158,19 @@ function platejka_enqueue_assets(): void {
 		)
 	);
 
+	if ( platejka_is_front_template() ) {
+		wp_enqueue_script(
+			'platejka-hero-media',
+			$theme_uri . '/js/modules/hero-media.js',
+			array(),
+			platejka_asset_version( 'js/modules/hero-media.js' ),
+			array(
+				'in_footer' => true,
+				'strategy'  => 'defer',
+			)
+		);
+	}
+
 	if ( is_search() ) {
 		wp_enqueue_script(
 			'platejka-search',

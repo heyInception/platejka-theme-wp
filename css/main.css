@@ -73,6 +73,11 @@
   font-display: swap;
   font-style: normal;
 }
+@media (prefers-reduced-motion: reduce) {
+  .hero__video {
+    pointer-events: auto;
+  }
+}
 html {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;

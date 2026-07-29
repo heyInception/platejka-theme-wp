@@ -55,9 +55,18 @@
                 ?>
               </picture>
             <?php else : ?>
-              <video width="553" height="553" autoplay muted loop preload="auto">
-                <source src="https://platejka.com/wp-content/uploads/2025/01/0001.mp4" type="video/mp4">
-              </video>
+              <video
+                class="hero__video js-hero-video"
+                width="553"
+                height="553"
+                muted
+                loop
+                playsinline
+                preload="none"
+                poster="<?php echo esc_url(get_template_directory_uri() . '/img/hero.webp'); ?>"
+                data-src="https://platejka.com/wp-content/uploads/2025/01/0001.mp4"
+                aria-label="<?php echo esc_attr__('Анимация сервиса Платёжка', 'platejka'); ?>"
+              ></video>
             <?php endif; ?>
           </div>
         </div>
