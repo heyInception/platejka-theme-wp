@@ -593,8 +593,9 @@ h6 {
 }
 .hero__column::after {
   content: "";
-  background-image: url(../img/coin.svg);
+  background-image: url(../img/coin.webp);
   background-repeat: no-repeat;
+  background-size: 126px 109px;
   position: absolute;
   right: 23px;
   bottom: 21px;
