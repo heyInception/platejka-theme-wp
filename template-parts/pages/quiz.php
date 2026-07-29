@@ -1,0 +1,2 @@
+<div data-marquiz-id="689b95fd327d1700199c7e16"></div>
+<script>(function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Inline', {id: '689b95fd327d1700199c7e16', buttonText: 'Получить расчет транзакции', bgColor: '#00a95f', textColor: '#ffffff', rounded: true, shadow: 'rgba(0, 169, 95, 0.5)', blicked: true, fixed: false, buttonOnMobile: true, disableOnMobile: false, fullWidth: false})</script>

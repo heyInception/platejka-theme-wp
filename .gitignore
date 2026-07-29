@@ -1,0 +1,15 @@
+node_modules/
+vendor/
+
+*.zip
+*.tar
+*.tar.gz
+
+.DS_Store
+Thumbs.db
+
+.idea/
+.vscode/
+
+*.log
+*.tmp
