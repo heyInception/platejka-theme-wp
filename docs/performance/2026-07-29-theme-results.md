@@ -169,3 +169,36 @@ Rocket generates its optimized output.
 - Cache preload and font preload reconciliation.
 - WebP Express compatibility after production cache generation.
 - Required exclusions for analytics, chat, Callibri, and Admitad.
+
+## Production activation check
+
+The optimized theme was activated on `platejka.com` on 2026-07-29. A fresh
+cache-bypass response returned HTTP 200 and confirmed:
+
+- assets are served from `platejka-pagespeed`, with no old-theme asset paths;
+- the integration loader has one script element and one source;
+- two inert reCAPTCHA sources remain available for 28 CF7 forms;
+- WP Rocket Delay rewrote 59 scripts.
+
+Two production gaps remain:
+
+- the production content/database still emits 15 `gtmpx.com` script sources;
+- no Used CSS marker is present, and Lighthouse still reports roughly 297 KiB
+  of unused CSS on mobile and 308 KiB on desktop.
+
+The single production PageSpeed report recorded:
+
+| Strategy | Performance | FCP | LCP | TBT | CLS | Speed Index |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Mobile | 69 | 3.5 s | 4.3 s | 220 ms | 0 | 6.8 s |
+| Desktop | 76 | 0.6 s | 0.9 s | 0 ms | 0.655 | 0.8 s |
+
+The desktop CLS result is a single-run laboratory anomaly relative to the
+28-day field CLS of 0.06. The 28-day mobile field data still fails Core Web
+Vitals with LCP 4.7 seconds; desktop field data passes with LCP 2.5 seconds
+and CLS 0.06.
+
+Direct interactive smoke testing could not be completed because the production
+origin reset both browser connections. HTTP contract checks and PageSpeed's
+remote Lighthouse run did complete. Do not claim the interaction checklist
+until it is run from a normal production browser session.
