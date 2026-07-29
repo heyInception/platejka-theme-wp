@@ -157,6 +157,16 @@ function platejka_enqueue_assets(): void {
 			'strategy'  => 'defer',
 		)
 	);
+	wp_enqueue_script(
+		'platejka-third-party-loader',
+		$theme_uri . '/js/modules/third-party-loader.js',
+		array(),
+		platejka_asset_version( 'js/modules/third-party-loader.js' ),
+		array(
+			'in_footer' => true,
+			'strategy'  => 'defer',
+		)
+	);
 
 	if ( platejka_is_front_template() ) {
 		wp_enqueue_script(

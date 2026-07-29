@@ -247,8 +247,6 @@ if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MOD
     window._ab_id_ = 131695
   </script>
   <script src="https://cdn.botfaqtor.ru/one.js"></script> -->
-  <script src="https://p.dmp.one/sync?stock_key=892d597ee76ed81ab1fbfb7f2b444b43" async referrerpolicy="no-referrer-when-downgrade" charset="UTF-8"></script>
-
 </head>
 
 <body <?php body_class(); ?>>
