@@ -143,6 +143,7 @@ function platejka_widgets_init()
 add_action('widgets_init', 'platejka_widgets_init');
 
 require get_template_directory() . '/inc/countries.php';
+require get_template_directory() . '/inc/exchange-rates.php';
 require get_template_directory() . '/inc/performance.php';
 
 /**

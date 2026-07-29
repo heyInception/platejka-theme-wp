@@ -2,13 +2,10 @@
 $list = platejka_get_countries();
 ?>
 <?php
-$url1 = 'http://80.90.188.45/euro_to_usd.txt';
-$url2 = 'http://80.90.188.45/usdt_to_rub.txt';
-$url3 = 'http://80.90.188.45/cny_to_usd.txt';
-
-$data1 = file_get_contents($url1);
-$data2 = file_get_contents($url2);
-$data3 = file_get_contents($url3);
+$rates = platejka_get_exchange_rates();
+$data1 = $rates['eur_usd'];
+$data2 = $rates['usdt_rub'];
+$data3 = $rates['cny_usd'];
 
 ?>
 <section class="calc">
@@ -190,11 +187,11 @@ $data3 = file_get_contents($url3);
     const com = x + com_5;
     x += com_5;
 
-    const c1 = parseFloat(<?php echo $data1 ?>);
+    const c1 = parseFloat(<?php echo wp_json_encode($data1); ?>);
     const usd = x * c1;
     x *= c1;
 
-    const h = parseFloat(<?php echo $data2 ?>);
+    const h = parseFloat(<?php echo wp_json_encode($data2); ?>);
     const h_1 = h / 100 * 1;
     const c2 = parseFloat((h + h_1).toFixed(4));
     x *= c2;
@@ -218,11 +215,11 @@ $data3 = file_get_contents($url3);
     const com = x + com_5;
     x += com_5;
 
-    const c1 = parseFloat(<?php echo $data3 ?>);
+    const c1 = parseFloat(<?php echo wp_json_encode($data3); ?>);
     const usd = x * c1;
     x *= c1;
 
-    const h = parseFloat(<?php echo $data2 ?>);
+    const h = parseFloat(<?php echo wp_json_encode($data2); ?>);
     const h_1 = h / 100 * 1;
     const c2 = parseFloat((h + h_1).toFixed(4));
     x *= c2;
@@ -246,7 +243,7 @@ $data3 = file_get_contents($url3);
     const com = x + com_5;
     x += com_5;
 
-    const h = parseFloat(<?php echo $data2 ?>);
+    const h = parseFloat(<?php echo wp_json_encode($data2); ?>);
     const h_1 = h / 100 * 1;
     const c2 = parseFloat((h + h_1).toFixed(4));
     x *= c2;
