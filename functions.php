@@ -142,31 +142,6 @@ function platejka_widgets_init()
 }
 add_action('widgets_init', 'platejka_widgets_init');
 
-/**
- * Enqueue scripts and styles.
- */
-function platejka_scripts()
-{
-
-	wp_style_add_data('platejka-style', 'rtl', 'replace');
-
-	wp_enqueue_style('platejka-vendor', get_stylesheet_directory_uri() . '/css/vendor.css');
-	wp_enqueue_style('platejka-main', get_stylesheet_directory_uri() . '/css/main.css');
-	wp_enqueue_style('platejka-about', get_stylesheet_directory_uri() . '/css/about.css');
-	wp_enqueue_style('platejka-style', get_stylesheet_uri(), array(), _S_VERSION);
-	wp_enqueue_script('platejka-main-js', get_template_directory_uri() . '/js/main.js', array(), _S_VERSION, true);
-	wp_enqueue_script('search', get_template_directory_uri() . '/js/search.js', array('jquery'), false, true);
-	wp_enqueue_script('leader-line', get_template_directory_uri() . '/js/leader-line.min.js', array('jquery'), false, true);
-	wp_enqueue_script('platejka-navigation', get_template_directory_uri() . '/js/navigation.js',  array('jquery'), _S_VERSION, true);
-	if (is_home() || is_single()) {
-		wp_enqueue_script('wazzup-js-blog-TweenMax', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js', array(), _S_VERSION, true);
-	}
-	if (is_singular() && comments_open() && get_option('thread_comments')) {
-		wp_enqueue_script('comment-reply');
-	}
-}
-add_action('wp_enqueue_scripts', 'platejka_scripts');
-
 require get_template_directory() . '/inc/countries.php';
 require get_template_directory() . '/inc/performance.php';
 
