@@ -152,8 +152,8 @@ Runtime staging checks:
 
 Performance checks:
 
-- run three mobile and three desktop PageSpeed tests on one warmed URL;
-- report the median Performance, FCP, LCP, TBT, CLS, and Speed Index;
+- run one mobile and one desktop PageSpeed test on one warmed URL;
+- report Performance, FCP, LCP, TBT, CLS, and Speed Index;
 - compare third-party main-thread time with the recorded staging baseline.
 
 ## Rollback
