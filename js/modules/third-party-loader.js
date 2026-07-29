@@ -23,14 +23,37 @@ window.platejkaLoadExternalScript = (src, attributes = {}) =>
     document.head.appendChild(script);
   });
 
-let deferredIntegrationsStarted = false;
+const GENERAL_FALLBACK_MS = 3000;
 
-const startDeferredIntegrations = () => {
-  if (deferredIntegrationsStarted) {
+const generalSources = [
+  ['https://top-fwz1.mail.ru/js/code.js', { id: 'tmr-code' }],
+  ['https://st.top100.ru/top100/top100.js'],
+  ['https://mc.yandex.ru/metrika/tag.js'],
+  ['https://www.googletagmanager.com/gtag/js?id=G-765QHYK81H'],
+];
+
+let generalIntegrationsStarted = false;
+
+const startGeneralIntegrations = () => {
+  if (generalIntegrationsStarted) {
     return;
   }
 
-  deferredIntegrationsStarted = true;
+  generalIntegrationsStarted = true;
+
+  generalSources.forEach(([src, attributes = {}]) => {
+    window.platejkaLoadExternalScript(src, attributes).catch(() => {});
+  });
+
+  if (window.platejkaYourGoodId) {
+    window
+      .platejkaLoadExternalScript(
+        `https://widget.yourgood.app/script/widget.js?id=${encodeURIComponent(
+          window.platejkaYourGoodId
+        )}`
+      )
+      .catch(() => {});
+  }
 
   window
     .platejkaLoadExternalScript(
@@ -44,14 +67,149 @@ const startDeferredIntegrations = () => {
 };
 
 ['pointerdown', 'keydown', 'touchstart'].forEach((eventName) => {
-  window.addEventListener(eventName, startDeferredIntegrations, {
+  window.addEventListener(eventName, startGeneralIntegrations, {
     once: true,
     passive: true,
   });
 });
 
-if ('requestIdleCallback' in window) {
-  window.requestIdleCallback(startDeferredIntegrations, { timeout: 5000 });
-} else {
-  window.setTimeout(startDeferredIntegrations, 3500);
+window.setTimeout(startGeneralIntegrations, GENERAL_FALLBACK_MS);
+
+let marquizPromise;
+
+const startMarquiz = () => {
+  if (marquizPromise) {
+    return marquizPromise;
+  }
+
+  marquizPromise = window
+    .platejkaLoadExternalScript('https://script.marquiz.ru/v2.js')
+    .then(() => {
+      if (window.Marquiz && window.platejkaMarquizOptions) {
+        window.Marquiz.init(window.platejkaMarquizOptions);
+      }
+    })
+    .catch(() => {});
+
+  return marquizPromise;
+};
+
+const marquizContainer = document.querySelector('[data-marquiz-id]');
+
+if (marquizContainer && 'IntersectionObserver' in window) {
+  const marquizObserver = new IntersectionObserver(
+    (entries, observer) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        observer.disconnect();
+        startMarquiz();
+      }
+    },
+    { rootMargin: '1200px 0px' }
+  );
+
+  marquizObserver.observe(marquizContainer);
+} else if (marquizContainer) {
+  startMarquiz();
 }
+
+document.addEventListener(
+  'click',
+  (event) => {
+    if (
+      event.target instanceof Element &&
+      event.target.closest(
+        '[data-marquiz-id], a[href*="fancyboxID"], .js-marquiz-trigger'
+      )
+    ) {
+      startMarquiz();
+    }
+  },
+  { passive: true }
+);
+
+if (!window.matchMedia('(max-width: 767px)').matches) {
+  window.setTimeout(startMarquiz, GENERAL_FALLBACK_MS);
+}
+
+let recaptchaPromise;
+let recaptchaReady = false;
+
+const startRecaptcha = () => {
+  if (recaptchaPromise) {
+    return recaptchaPromise;
+  }
+
+  const placeholders = [
+    ...document.querySelectorAll('script[data-platejka-recaptcha-src]'),
+  ];
+
+  recaptchaPromise = placeholders
+    .reduce(
+      (promise, placeholder) =>
+        promise.then(() =>
+          window.platejkaLoadExternalScript(
+            placeholder.dataset.platejkaRecaptchaSrc
+          )
+        ),
+      Promise.resolve()
+    )
+    .then(() => {
+      recaptchaReady = true;
+    })
+    .catch(() => {
+      recaptchaReady = true;
+    });
+
+  return recaptchaPromise;
+};
+
+const recaptchaForms = [...document.querySelectorAll('.wpcf7 form')];
+
+if (recaptchaForms.length && 'IntersectionObserver' in window) {
+  const recaptchaObserver = new IntersectionObserver(
+    (entries, observer) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        observer.disconnect();
+        startRecaptcha();
+      }
+    },
+    { rootMargin: '1200px 0px' }
+  );
+
+  recaptchaForms.forEach((form) => recaptchaObserver.observe(form));
+} else if (recaptchaForms.length) {
+  startRecaptcha();
+}
+
+recaptchaForms.forEach((form) => {
+  ['focusin', 'pointerdown', 'touchstart'].forEach((eventName) => {
+    form.addEventListener(eventName, startRecaptcha, {
+      once: true,
+      passive: true,
+    });
+  });
+
+  form.addEventListener(
+    'submit',
+    (event) => {
+      if (recaptchaReady) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      const submitter = event.submitter;
+
+      startRecaptcha().finally(() => {
+        if (typeof form.requestSubmit === 'function') {
+          form.requestSubmit(submitter || undefined);
+        } else {
+          form.dispatchEvent(
+            new Event('submit', { bubbles: true, cancelable: true })
+          );
+        }
+      });
+    },
+    true
+  );
+});

@@ -85,6 +85,34 @@ function platejka_preload_primary_font(): void {
 add_action( 'wp_head', 'platejka_preload_primary_font', 2 );
 
 /**
+ * Replace Contact Form 7 reCAPTCHA network tags with inert loader markers.
+ *
+ * @param string $tag    Original script tag.
+ * @param string $handle Registered WordPress script handle.
+ * @param string $src    Registered script source.
+ * @return string
+ */
+function platejka_defer_recaptcha_script_tag(
+	string $tag,
+	string $handle,
+	string $src
+): string {
+	if (
+		is_admin() ||
+		! in_array( $handle, array( 'google-recaptcha', 'wpcf7-recaptcha' ), true )
+	) {
+		return $tag;
+	}
+
+	return sprintf(
+		'<script type="application/json" id="%1$s-js" data-platejka-recaptcha-src="%2$s"></script>' . "\n",
+		esc_attr( $handle ),
+		esc_url( $src )
+	);
+}
+add_filter( 'script_loader_tag', 'platejka_defer_recaptcha_script_tag', 20, 3 );
+
+/**
  * Enqueue only the assets needed by the current template.
  *
  * @return void
