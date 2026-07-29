@@ -2369,7 +2369,7 @@ input[type="range"].calculate__range.slider-progress::-ms-fill-lower {
   gap: 20px;
   border-radius: 30px;
   padding: 20px;
-  background: url(../img/notice.jpg);
+  background: url(../img/notice.webp);
   background-repeat: repeat;
   margin: 110px 0;
 }
@@ -3771,7 +3771,7 @@ input[type="range"].calculate__range.slider-progress::-ms-fill-lower {
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
   gap: 40px;
-  background-image: url(../img/international.jpg);
+  background-image: url(../img/international.webp);
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 40px;
@@ -7278,7 +7278,7 @@ input[type="range"].calculate__range.slider-progress::-ms-fill-lower {
     content: none;
   }
   .hero__row_right::after {
-    background-image: url(../img/hero-mob.png);
+    background-image: url(../img/hero-mob.webp);
     width: 100vw;
     height: 100%;
     background-position-x: center;

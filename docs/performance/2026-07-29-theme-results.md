@@ -28,6 +28,9 @@ plugin-owned chat were not changed.
   WordPress Cron refreshes the same three endpoints hourly and the calculator
   reads the last stored values.
 - Two browser-observed JavaScript initialization errors were guarded.
+- Four CSS backgrounds now use existing WebP copies instead of PNG/JPEG:
+  `teams/before`, `international`, `hero-mob`, and `notice`. Their combined
+  source size drops from 822,423 bytes to 51,778 bytes.
 
 ## Local measurements
 
@@ -55,11 +58,44 @@ services, international payments, and search templates.
 - The exchange-rate Cron event is registered hourly and a manual refresh
   completed with valid stored values.
 
+## WordPress.com preview
+
+Preview URL: `https://inceptionhack-amipe-studio.wp.build`
+
+- The database contained 60 unexpected blocking script tags referencing
+  `gtmpx.com` across 13 `posts`/`postmeta` rows. No matching theme or plugin
+  files existed. A full SQLite backup was made outside the uploaded site and
+  only those exact script tags were removed. Required Header integrations were
+  not changed.
+- Fresh preview HTML completes loading, contains the footer, uses the
+  `platejka-pagespeed` theme, and contains no `gtmpx.com` scripts.
+- The calculator recalculated 10,000 EUR successfully and the transaction
+  request modal opened.
+- The original preview root still served a stale WordPress.com edge-cache
+  response after the update. PageSpeed and functional checks therefore used a
+  cache-bypass query URL. This preview-only cache must expire or be purged
+  before validating the bare preview root.
+
+### PageSpeed Insights laboratory result
+
+One run was recorded against the fresh cache-bypass preview on 2026-07-29.
+The four CSS WebP substitutions above were identified from this run and were
+implemented afterwards, so the table is the pre-substitution staging baseline.
+
+| Strategy | Performance | FCP | LCP | TBT | CLS | Speed Index |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Mobile | 52 | 9.2 s | 21.1 s | 100 ms | 0.098 | 13.7 s |
+| Desktop | 93 | 0.7 s | 1.1 s | 120 ms | 0.036 | 1.9 s |
+
+Mobile Lighthouse reported a 10 ms TTFB. Its largest theme-owned image
+opportunities were the four CSS backgrounds now switched to WebP. Remaining
+large opportunities include plugin/third-party JavaScript, unused compiled CSS
+and JavaScript, and SVG files served from the media library.
+
 ## Deferred / deployment checks
 
-- Production PageSpeed Insights could not be recorded from this environment
-  because the public API returned HTTP 429. Run three mobile and three desktop
-  tests after staging/production deployment and cache warm-up.
+- Run three mobile and three desktop tests after the updated theme commit is
+  deployed and the bare production URL cache is warmed.
 - The in-app browser screenshot command timed out, so the required 390/768/1440
   visual comparisons must be completed on staging before merge.
 - A complete analytics, Callibri, Admitad, chat, CF7 submission, calculator,
