@@ -95,6 +95,61 @@ fallback enters the desktop Lighthouse measurement window and increases TBT.
 Further score work belongs to the WP Rocket delay/exclusion phase and the
 remaining compiled/plugin assets.
 
+## WP Rocket configuration phase
+
+The complete original `wp_rocket_settings` option was backed up outside the
+site before modification. The guarded WP-CLI configurator then:
+
+- enabled Remove Unused CSS with a concrete dynamic-class safelist;
+- kept CSS/JavaScript minification, JavaScript defer, and delay enabled;
+- excluded the theme integration loader, its queue initializers, Callibri, and
+  Artfut/Admitad from a second delay;
+- removed the obsolete broad reCAPTCHA and Yandex delay exclusions;
+- enabled WP Rocket mobile cache and its required separate mobile files;
+- retained the existing lazy-load, image-dimension, font, and WebP Express
+  boundaries.
+
+The WP Rocket settings contract completed RED to GREEN. Two consecutive local
+front-page requests returned HTTP 200 with the footer, one theme integration
+loader, two inert reCAPTCHA placeholders, and no `gtmpx.com`. The local
+WordPress Studio domain did not produce a Used CSS marker, so staging is the
+authoritative RUCSS environment.
+
+Local browser control loaded and inspected the page successfully but timed out
+on two different click mechanisms. The interaction and visual checks are
+therefore combined with the staging check rather than repeated locally.
+
+### WP Rocket preview result
+
+The preview update completed after one retry following an `ECONNRESET`. A
+fresh `utm_source` URL returned the updated theme, footer, one direct
+integration loader, two inert reCAPTCHA placeholders, and no `gtmpx.com`.
+
+One PageSpeed report was recorded for that warmed URL:
+
+| Strategy | Performance | FCP | LCP | TBT | CLS | Speed Index |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Mobile | 65 | 3.0 s | 5.5 s | 70 ms | 0.098 | 7.0 s |
+| Desktop | 78 | 0.6 s | 0.9 s | 330 ms | 0.036 | 3.0 s |
+
+Compared with the preceding theme-only report, Performance increased from 56
+to 65 on mobile and from 73 to 78 on desktop. Mobile FCP improved from 5.3 to
+3.0 seconds and LCP from 7.8 to 5.5 seconds. Desktop LCP improved from 1.1 to
+0.9 seconds and TBT from 440 to 330 ms.
+
+The preview response still served the original stylesheet URLs and Lighthouse
+still reported 274 KiB of unused CSS on mobile and 286 KiB on desktop. The
+temporary preview domain therefore did not receive WP Rocket SaaS Used CSS
+output. Its HTML also contained no `rocketlazyloadscript` transformations.
+The saved configuration is valid, but Remove Unused CSS and WP Rocket's delay
+rewrite require a final production-domain cache generation and check.
+
+Because browser interaction control timed out on both local click mechanisms,
+the current phase does not claim a new automated click regression pass.
+Calculator and modal behavior were confirmed in the preceding theme phase;
+production deployment still requires the short interaction checklist after WP
+Rocket generates its optimized output.
+
 ## Deferred / deployment checks
 
 - Recheck production once after deployment and cache warm-up; no repeated
