@@ -31,7 +31,18 @@
                   <div class="work__item <?php the_sub_field('vybor_elementa'); ?>">
                     <?php $izobrazhenie = get_sub_field('izobrazhenie'); ?>
                     <?php if ($izobrazhenie) : ?>
-                      <div class="work__img"><img src="<?php echo esc_url($izobrazhenie['url']); ?>" alt="<?php echo esc_attr($izobrazhenie['alt']); ?>" /></div>
+                      <div class="work__img">
+                        <?php
+                        echo platejka_render_acf_image(
+                          $izobrazhenie,
+                          'medium',
+                          array(
+                            'alt'   => $izobrazhenie['alt'] ?? '',
+                            'sizes' => '(max-width: 767px) 100vw, 320px',
+                          )
+                        );
+                        ?>
+                      </div>
                     <?php endif; ?>
                     <div class="work__wrapper">
                       <div class="work__head-main"><?php the_sub_field('zagolovok'); ?></div>

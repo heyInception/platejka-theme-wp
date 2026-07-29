@@ -458,7 +458,7 @@ jQuery(document).ready(function () {
   wrapLastSlides();
 
   // И при изменении размера окна
-  $(window).on('resize', wrapLastSlides);
+  jQuery(window).on('resize', wrapLastSlides);
 });
 
 jQuery(document).ready(function ($) {

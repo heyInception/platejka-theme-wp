@@ -15,7 +15,16 @@
                 <a href="<?php echo esc_url($ssylka['url']); ?>" target="<?php echo esc_attr($ssylka['target']); ?>" class="destinations__item" rel="nofollow">
                   <?php $izobrazhenie = get_sub_field('izobrazhenie'); ?>
                   <?php if ($izobrazhenie) : ?>
-                    <img src="<?php echo esc_url($izobrazhenie['url']); ?>" alt="<?php echo esc_attr($izobrazhenie['alt']); ?>" />
+                    <?php
+                    echo platejka_render_acf_image(
+                      $izobrazhenie,
+                      'thumbnail',
+                      array(
+                        'alt'   => $izobrazhenie['alt'] ?? '',
+                        'sizes' => '96px',
+                      )
+                    );
+                    ?>
                   <?php endif; ?>
                   <span><?php the_sub_field('nazvanie'); ?></span>
                 </a>
@@ -23,7 +32,16 @@
                 <div class="destinations__item">
                   <?php $izobrazhenie = get_sub_field('izobrazhenie'); ?>
                   <?php if ($izobrazhenie) : ?>
-                    <img src="<?php echo esc_url($izobrazhenie['url']); ?>" alt="<?php echo esc_attr($izobrazhenie['alt']); ?>" />
+                    <?php
+                    echo platejka_render_acf_image(
+                      $izobrazhenie,
+                      'thumbnail',
+                      array(
+                        'alt'   => $izobrazhenie['alt'] ?? '',
+                        'sizes' => '96px',
+                      )
+                    );
+                    ?>
                   <?php endif; ?>
                   <span><?php the_sub_field('nazvanie'); ?></span>
                 </div>

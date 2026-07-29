@@ -54,24 +54,29 @@
 /* stylelint-disable value-keyword-case */
 @font-face {
   font-family: "Inter";
-  src: url("../fonts/../fonts/Inter-SemiBold.ttf");
+  src: url("../fonts/Inter-SemiBold.woff2") format("woff2");
   font-weight: 600;
   font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Inter";
-  src: url("../fonts/../fonts/Inter-Regular.ttf");
+  src: url("../fonts/Inter-Regular.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
   font-style: normal;
 }
 @font-face {
   font-family: "Inter";
-  src: url("../fonts/../fonts/Inter-Medium.ttf");
+  src: url("../fonts/Inter-Medium.woff2") format("woff2");
   font-weight: 500;
   font-display: swap;
   font-style: normal;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__video {
+    pointer-events: auto;
+  }
 }
 html {
   -webkit-box-sizing: border-box;
@@ -588,8 +593,9 @@ h6 {
 }
 .hero__column::after {
   content: "";
-  background-image: url(../img/coin.svg);
+  background-image: url(../img/coin.webp);
   background-repeat: no-repeat;
+  background-size: 126px 109px;
   position: absolute;
   right: 23px;
   bottom: 21px;
@@ -2363,7 +2369,7 @@ input[type="range"].calculate__range.slider-progress::-ms-fill-lower {
   gap: 20px;
   border-radius: 30px;
   padding: 20px;
-  background: url(../img/notice.jpg);
+  background: url(../img/notice.webp);
   background-repeat: repeat;
   margin: 110px 0;
 }
@@ -3765,7 +3771,7 @@ input[type="range"].calculate__range.slider-progress::-ms-fill-lower {
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
   gap: 40px;
-  background-image: url(../img/international.jpg);
+  background-image: url(../img/international.webp);
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 40px;
@@ -7272,7 +7278,7 @@ input[type="range"].calculate__range.slider-progress::-ms-fill-lower {
     content: none;
   }
   .hero__row_right::after {
-    background-image: url(../img/hero-mob.png);
+    background-image: url(../img/hero-mob.webp);
     width: 100vw;
     height: 100%;
     background-position-x: center;

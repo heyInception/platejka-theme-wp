@@ -406,14 +406,18 @@ if (is_front_page()) {
   });
 </script>
 <script>
+  let hoverTextTimer;
+
   setTimeout(() => {
     jQuery(".salebot_circle_trigger").append('<span class="on-hover-text">Связаться с нами!</span>');
     jQuery(".salebot_circle_trigger").on({
       mouseenter: function() {
+        clearTimeout(hoverTextTimer);
         jQuery('.on-hover-text').fadeOut();
       },
       mouseleave: function() {
-        setInterval(() => {
+        clearTimeout(hoverTextTimer);
+        hoverTextTimer = setTimeout(() => {
           jQuery('.on-hover-text').fadeIn();
         }, 7000);
       }

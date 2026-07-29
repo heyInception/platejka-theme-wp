@@ -26,6 +26,12 @@ form.wpcf7-form {
     position: relative;
     transition: 0.3s;
 }
+
+@media (prefers-reduced-motion: reduce), (max-width: 767px) {
+    .normal-page .table-wrapper::before {
+        animation: none;
+    }
+}
 form.wpcf7-form::before {
     content: "";
     width: 100%;

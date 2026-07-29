@@ -600,7 +600,7 @@
 }
 .a-about__info::before {
   content: "";
-  background-image: url(../img/teams/before.png);
+  background-image: url(../img/teams/before.webp);
   position: absolute;
   left: 0;
   bottom: 0;

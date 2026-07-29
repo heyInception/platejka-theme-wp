@@ -7,7 +7,7 @@
           <div class="guarantees__head">Гарантируем поступление средств вашему контрагенту своими деньгами</div>
           <div class="guarantees__subhead">Мы берем на себя все финансовые риски, гарантируя, что средства будут поступать вашему контрагенту вовремя и без задержек (при платежах в евро через SWIFT).</div>
           <div class="guarantees__img">
-            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/guarantees-img.png" alt="">
+            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/guarantees-img.png" alt="" width="162" height="223" loading="lazy" decoding="async">
           </div>
         </div>
         <div class="guarantees__items">

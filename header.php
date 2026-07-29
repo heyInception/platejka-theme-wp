@@ -36,28 +36,11 @@ if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MOD
       type: "pageView",
       start: (new Date()).getTime()
     });
-    (function(d, w, id) {
-      if (d.getElementById(id)) return;
-      var ts = d.createElement("script");
-      ts.type = "text/javascript";
-      ts.async = true;
-      ts.id = id;
-      ts.src = "https://top-fwz1.mail.ru/js/code.js";
-      var f = function() {
-        var s = d.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(ts, s);
-      };
-      if (w.opera == "[object Opera]") {
-        d.addEventListener("DOMContentLoaded", f, false);
-      } else {
-        f();
-      }
-    })(document, window, "tmr-code");
   </script>
   <!-- /Top.Mail.Ru counter -->
   <!-- Top100 (Kraken) Counter -->
   <script>
-    (function(w, d, c) {
+    (function(w, c) {
       (w[c] = w[c] || []).push(function() {
         var options = {
           project: 7731957,
@@ -66,39 +49,12 @@ if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MOD
           w.top100Counter = new top100(options);
         } catch (e) {}
       });
-      var n = d.getElementsByTagName("script")[0],
-        s = d.createElement("script"),
-        f = function() {
-          n.parentNode.insertBefore(s, n);
-        };
-      s.type = "text/javascript";
-      s.async = true;
-      s.src =
-        (d.location.protocol == "https:" ? "https:" : "http:") +
-        "//st.top100.ru/top100/top100.js";
-
-      if (w.opera == "[object Opera]") {
-        d.addEventListener("DOMContentLoaded", f, false);
-      } else {
-        f();
-      }
-    })(window, document, "_top100q");
+    })(window, "_top100q");
   </script>
   <!-- END Top100 (Kraken) Counter -->
   <!-- Marquiz script start -->
   <script>
-    (function(w, d, s, o) {
-      var j = d.createElement(s);
-      j.async = true;
-      j.src = '//script.marquiz.ru/v2.js';
-      j.onload = function() {
-        if (document.readyState !== 'loading') Marquiz.init(o);
-        else document.addEventListener("DOMContentLoaded", function() {
-          Marquiz.init(o);
-        });
-      };
-      d.head.insertBefore(j, d.head.firstElementChild);
-    })(window, document, 'script', {
+    window.platejkaMarquizOptions = {
       host: '//quiz.marquiz.ru',
       region: 'ru',
       id: '689b95fd327d1700199c7e16',
@@ -106,25 +62,16 @@ if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MOD
       autoOpenFreq: 'once',
       openOnExit: false,
       disableOnMobile: false
-    });
+    };
   </script>
   <!-- Marquiz script end → -->
   <meta name="yandex-verification" content="fe26ea8b030ef2c2" />
   <!-- Yandex.Metrika counter -->
   <script type="text/javascript">
-    (function(m, e, t, r, i, k, a) {
-      m[i] = m[i] || function() {
-        (m[i].a = m[i].a || []).push(arguments)
-      };
-      m[i].l = 1 * new Date();
-      for (var j = 0; j < document.scripts.length; j++) {
-        if (document.scripts[j].src === r) {
-          return;
-        }
-      }
-      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-    })
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    window.ym = window.ym || function() {
+      (window.ym.a = window.ym.a || []).push(arguments);
+    };
+    window.ym.l = 1 * new Date();
 
     ym(97235179, "init", {
       clickmap: true,
@@ -135,7 +82,6 @@ if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MOD
   </script>
   <!-- /Yandex.Metrika counter -->
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-765QHYK81H"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
 
@@ -147,13 +93,7 @@ if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MOD
     gtag('config', 'G-765QHYK81H');
   </script>
   <script>
-    (function() {
-      var widget = document.createElement('script');
-      widget.defer = true;
-      widget.dataset.pfId = '2d1a307b-05ec-4aec-b06e-76e872366ef5';
-      widget.src = 'https://widget.yourgood.app/script/widget.js?id=2d1a307b-05ec-4aec-b06e-76e872366ef5&now=' + Date.now();
-      document.head.appendChild(widget);
-    })()
+    window.platejkaYourGoodId = '2d1a307b-05ec-4aec-b06e-76e872366ef5';
   </script>
   <script src="//cdn.callibri.ru/callibri.js" type="text/javascript" charset="utf-8" defer></script>
   <script src="https://www.artfut.com/static/tagtag.min.js?campaign_code=af79c4ac45" async
@@ -247,8 +187,6 @@ if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MOD
     window._ab_id_ = 131695
   </script>
   <script src="https://cdn.botfaqtor.ru/one.js"></script> -->
-  <script src="https://p.dmp.one/sync?stock_key=892d597ee76ed81ab1fbfb7f2b444b43" async referrerpolicy="no-referrer-when-downgrade" charset="UTF-8"></script>
-
 </head>
 
 <body <?php body_class(); ?>>

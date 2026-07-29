@@ -13,7 +13,7 @@
         </div>
         <div class="request__column">
           <div class="request__img">
-            <img src="<?php echo get_template_directory_uri(); ?>/img/request.png" alt="Предприниматели мыслят возможностями, а не ограничениями">
+            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/img/request.png" alt="Предприниматели мыслят возможностями, а не ограничениями" width="575" height="278" loading="lazy" decoding="async">
           </div>
           <div class="request__btn request__btn_show">
             <a href="#fancyboxID-1" class="fancybox-inline btn-reset">Стать клиентом</a>

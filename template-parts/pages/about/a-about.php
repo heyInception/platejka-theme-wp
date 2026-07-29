@@ -23,7 +23,16 @@
                       <?php foreach ($izobrazhenie_images as $izobrazhenie_image): ?>
                         <div class="swiper-slide">
                           <a href="<?php echo esc_url($izobrazhenie_image['url']); ?>">
-                            <img src="<?php echo esc_url($izobrazhenie_image['sizes']['large']); ?>" alt="<?php echo esc_attr($izobrazhenie_image['alt']); ?>" />
+                            <?php
+                            echo platejka_render_acf_image(
+                              $izobrazhenie_image,
+                              'large',
+                              array(
+                                'alt'   => $izobrazhenie_image['alt'] ?? '',
+                                'sizes' => '(max-width: 767px) 100vw, (max-width: 1229px) 50vw, 600px',
+                              )
+                            );
+                            ?>
                           </a>
                         </div>
                       <?php endforeach; ?>
@@ -37,7 +46,16 @@
                     <?php if ($izobrazhenie_images) : ?>
                       <?php foreach ($izobrazhenie_images as $izobrazhenie_image): ?>
                         <div class="swiper-slide">
-                          <img src="<?php echo esc_url($izobrazhenie_image['sizes']['large']); ?>" alt="<?php echo esc_attr($izobrazhenie_image['alt']); ?>" />
+                          <?php
+                          echo platejka_render_acf_image(
+                            $izobrazhenie_image,
+                            'large',
+                            array(
+                              'alt'   => $izobrazhenie_image['alt'] ?? '',
+                              'sizes' => '(max-width: 767px) 100vw, (max-width: 1229px) 50vw, 600px',
+                            )
+                          );
+                          ?>
                         </div>
                       <?php endforeach; ?>
                     <?php endif; ?>
