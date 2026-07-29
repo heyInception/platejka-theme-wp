@@ -68,9 +68,11 @@ alongside Remove Unused CSS.
 Keep the existing lazy-load, CSS-background lazy-load, iframe lazy-load, image
 dimension, and WebP Express behavior.
 
-Enable caching for mobile visitors and keep separate mobile cache files
-disabled because the theme is responsive and serves the same markup. Keep the
-theme-owned Inter preload and do not duplicate it in WP Rocket.
+Enable caching for mobile visitors and separate mobile cache files. WP Rocket
+3.16.2.1 forces separate files whenever mobile cache is enabled, so the two
+options must be enabled together. The responsive theme still serves the same
+markup. Keep the theme-owned Inter preload and do not duplicate it in WP
+Rocket.
 
 After applying the settings, clear WP Rocket cache and generated CSS so the
 next requests rebuild from the new configuration.
